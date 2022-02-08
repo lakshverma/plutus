@@ -10,4 +10,12 @@
   * Coming soon!
 
 ## Current Status
-  * UI Mockup - [done](https://www.figma.com/proto/XCujR4jGAC3dMhzebz2Xch/Plutus-CRM?node-id=0%3A1302&scaling=scale-down&page-id=0%3A821&starting-point-node-id=0%3A1302)
+- [x] UI Mockup - [live prototype](https://www.figma.com/proto/XCujR4jGAC3dMhzebz2Xch/Plutus-CRM?node-id=0%3A1302&scaling=scale-down&page-id=0%3A821&starting-point-node-id=0%3A1302)
+- [x] Database Design - [model screenshot](https://drive.google.com/file/d/1wWch6KY5_NCG8XFYC8PkDfBcgE-53xlY/view?usp=sharing)
+- [ ] Pre-alpha release
+
+## Screenshots
+![CustomerProfile](https://raw.githubusercontent.com/lakshverma/plutus/main/art/Profile.png)
+![Transaction](https://raw.githubusercontent.com/lakshverma/plutus/main/art/Transaction.png)
+![CreateTask](https://raw.githubusercontent.com/lakshverma/plutus/main/art/CreateTask.png)
+
