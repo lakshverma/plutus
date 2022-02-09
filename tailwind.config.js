@@ -3,18 +3,20 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'lato': ['Lato', 'sans-serif'],
+        lato: ["Lato", "sans-serif"],
       },
       colors: {
-        'primary-blue-plutus': '#5E81F4',
-        'primary-dark-plutus': '#1C1D21',
-        'primary-grey-plutus': '#8181a5',
-        'outline-grey-plutus': '#F0F0F3',
-        'secondary-pink-plutus': '#FF808B',
-        'skyblue-plutus': '#EEF2FE',
-        'lightgrey-plutus': "#F6F6F6",
+        "primary-blue-plutus": "#5E81F4",
+        "primary-dark-plutus": "#1C1D21",
+        "primary-grey-plutus": "#8181a5",
+        "outline-grey-plutus": "#F0F0F3",
+        "secondary-pink-plutus": "#FF808B",
+        "skyblue-plutus": "#EEF2FE",
+        "lightgrey-plutus": "#F6F6F6",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")({
+    strategy: 'class',
+  }),],
 };

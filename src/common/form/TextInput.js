@@ -1,7 +1,8 @@
 import React from "react";
 
+// Accepts  name, label, width, placeholder, iconClass and error as props in addition to the standard Formik props for text inputs.
 const TextInput = (props) => {
-  console.log(props.error);
+//   console.log(props)
   const validationClass = props.error
     ? {
         div: "focus-within:text-secondary-pink-plutus border-secondary-pink-plutus",
