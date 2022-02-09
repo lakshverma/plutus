@@ -18,7 +18,7 @@
 - [ ] Pre-alpha release
 
 ### Screenshots
-![CustomerProfile](https://raw.githubusercontent.com/lakshverma/plutus/main/art/Profile.png)
-![Transaction](https://raw.githubusercontent.com/lakshverma/plutus/main/art/Transaction.png)
-![CreateTask](https://raw.githubusercontent.com/lakshverma/plutus/main/art/CreateTask.png)
+![CustomerProfile](https://raw.githubusercontent.com/lakshverma/plutus/main/assets/Profile.png)
+![Transaction](https://raw.githubusercontent.com/lakshverma/plutus/main/assets/Transaction.png)
+![CreateTask](https://raw.githubusercontent.com/lakshverma/plutus/main/assets/CreateTask.png)
 
