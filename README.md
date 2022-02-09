@@ -17,16 +17,8 @@
 - [x] Database Design - [model screenshot](https://drive.google.com/file/d/1wWch6KY5_NCG8XFYC8PkDfBcgE-53xlY/view?usp=sharing)
 - [ ] Pre-alpha release
 
-<<<<<<< HEAD
-## Screenshots
-=======
 ### Screenshots
->>>>>>> 8c1089d1d15812effba560fca0e090e53b897eae
 ![CustomerProfile](https://raw.githubusercontent.com/lakshverma/plutus/main/art/Profile.png)
 ![Transaction](https://raw.githubusercontent.com/lakshverma/plutus/main/art/Transaction.png)
 ![CreateTask](https://raw.githubusercontent.com/lakshverma/plutus/main/art/CreateTask.png)
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 8c1089d1d15812effba560fca0e090e53b897eae
