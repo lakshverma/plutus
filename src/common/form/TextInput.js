@@ -10,7 +10,7 @@ const TextInput = (props) => {
         icon: "text-secondary-pink-plutus",
       }
     : {
-        div: "focus-within:text-primary-dark-plutus border-outline-grey-plutus",
+        div: "focus-within:text-primary-dark-plutus border-outline-grey-plutus focus-within:border-primary-blue-plutus",
         input: "primary-dark-plutus",
         icon: "primary-dark-plutus",
       };
