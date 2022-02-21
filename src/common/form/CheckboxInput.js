@@ -8,7 +8,7 @@ const CheckboxInput = (props) => {
       ? "text-primary-dark-plutus font-bold text-base leading-6"
       : "text-primary-grey-plutus text-sm leading-6";
 
-  const validationClass = props.errors
+  const validationClass = props.errors && props.touched
     ? "text-secondary-pink-plutus border-secondary-pink-plutus"
     : "text-primary-blue-plutus border-primary-dark-plutus";
 
