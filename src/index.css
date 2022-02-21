@@ -3,3 +3,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.react-datepicker__header {
+    @apply bg-background-lightgrey-plutus !important;
+}
+
+.react-datepicker__day--selected {
+    @apply bg-primary-blue-plutus !important;
+}
