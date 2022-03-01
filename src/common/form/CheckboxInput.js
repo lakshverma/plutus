@@ -13,7 +13,7 @@ const CheckboxInput = (props) => {
     : "text-primary-blue-plutus border-primary-dark-plutus";
 
   return (
-    <>
+    <div className={props.className}>
       <label>
         <input
           type="checkbox"
@@ -23,9 +23,9 @@ const CheckboxInput = (props) => {
           name={props.field.name}
           className={`rounded-sm form-checkbox ${validationClass}`}
         ></input>
-        <span className={`${labelType} ml-3 font-lato`}>{props.label}</span>
+        <span className={`${labelType} ml-3 font-lato text-sm`}>{props.label}</span>
       </label>
-    </>
+    </div>
   );
 };
 
