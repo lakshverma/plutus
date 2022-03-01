@@ -14,8 +14,15 @@ const colors = {
   backgroundLight: "#F5F5FA",
 };
 
-const FormDropdown = ({ field, form, options, errors, isMulti, touched }) => {
-  console.log(form);
+const FormDropdown = ({
+  field,
+  form,
+  options,
+  errors,
+  isMulti,
+  touched,
+  label,
+}) => {
   const onChange = (option) => {
     form.setFieldValue(
       field.name,
@@ -131,7 +138,10 @@ const FormDropdown = ({ field, form, options, errors, isMulti, touched }) => {
   };
 
   return (
-    <div>
+    <div className="inline-block">
+      <label className="block text-sm text-primary-grey-plutus font-lato">
+        {label}
+      </label>
       <Select
         name={field.name}
         value={getValue()}
