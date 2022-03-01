@@ -1,7 +1,6 @@
 import React from "react";
-import DatePicker from "react-datepicker";
+import DatePicker, { CalendarContainer } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { CalendarContainer } from "react-datepicker";
 import { getMonth, getYear } from "date-fns";
 import range from "lodash/range";
 import TextInput from "./TextInput";
@@ -31,10 +30,7 @@ const months = [
 ];
 
 const DateInput = (props) => {
-  console.log(props)
-
   const onChange = (option) => {
-    console.log(option)
     props.form.setFieldValue(props.field.name, option);
   };
 
@@ -49,10 +45,12 @@ const DateInput = (props) => {
         prevMonthButtonDisabled,
         nextMonthButtonDisabled,
       }) => (
-        <div
-          className="flex justify-center m-3 bg-background-lightgrey-plutus"
-        >
-          <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled} className="pr-8 text-xl font-bold font-lato text-primary-grey-plutus">
+        <div className="flex justify-center m-3 bg-background-lightgrey-plutus">
+          <button
+            onClick={decreaseMonth}
+            disabled={prevMonthButtonDisabled}
+            className="pr-8 text-xl font-bold font-lato text-primary-grey-plutus"
+          >
             {"<"}
           </button>
           <select
@@ -81,7 +79,11 @@ const DateInput = (props) => {
             ))}
           </select>
 
-          <button onClick={increaseMonth} disabled={nextMonthButtonDisabled} className="pl-8 text-xl font-bold font-lato text-primary-grey-plutus">
+          <button
+            onClick={increaseMonth}
+            disabled={nextMonthButtonDisabled}
+            className="pl-8 text-xl font-bold font-lato text-primary-grey-plutus"
+          >
             {">"}
           </button>
         </div>
