@@ -15,6 +15,12 @@ module.exports = {
         "lightgrey-plutus": "#F6F6F6",
         "background-lightgrey-plutus": "#F5F5FA",
       },
+      lineHeight: {
+        '11half': '2.65rem',
+      },
+      backgroundImage: {
+        'gradient-radial-plutus': 'radial-gradient(98.58% 98.58% at 57.43% 48.15%, #5E81F4 0%, #1B51E5 100%)'
+      },
     },
   },
   plugins: [require("@tailwindcss/forms")({
