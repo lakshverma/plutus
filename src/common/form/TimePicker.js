@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import DatePicker, { CalendarContainer } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TextInput from "./TextInput";
@@ -16,16 +17,23 @@ const MyContainer = ({ className, children }) => {
 // the time substring is extracted from datetime string in the backend app.
 const TimePicker = (props) => {
   const onChange = (option) => {
-    console.log(option.toLocaleTimeString());
     props.form.setFieldValue(props.field.name, option);
+    // Third parameter is set false to skip immediate Formik validation on that call,
+    //  so instead it would get the validation result from the earlier setFieldValue call (which, presumably, has the correct values).
+    // This is a workaround for a known bug with Formik library. More info: https://github.com/jaredpalmer/formik/issues/2457
+    props.form.setFieldTouched(props.field.name, true, false);
   };
 
-  console.log(props.errors);
+  const onBlur = () => {
+    props.form.setFieldTouched(props.field.name, true);
+  };
+
   return (
     <div className="inline-block">
       <DatePicker
         selected={props.field.value}
         onChange={onChange}
+        onBlur={onBlur}
         calendarContainer={MyContainer}
         showTimeSelect
         showTimeSelectOnly
@@ -46,6 +54,24 @@ const TimePicker = (props) => {
       />
     </div>
   );
+};
+
+TimePicker.propTypes = {
+  field: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
+      .isRequired,
+  }),
+  form: PropTypes.shape({
+    setFieldValue: PropTypes.func.isRequired,
+    setFieldTouched: PropTypes.func.isRequired,
+  }),
+  errors: PropTypes.string,
+  touched: PropTypes.bool,
+  label: PropTypes.string,
+  width: PropTypes.string,
+  placeholder: PropTypes.string,
+  iconClass: PropTypes.string.isRequired,
 };
 
 export default TimePicker;

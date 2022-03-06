@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Select from "react-select";
 
 // Defining the theme colors here instead of relying on tailwind.config.js as we're not using Tailwind
@@ -153,6 +154,24 @@ const FormDropdown = ({
       />
     </div>
   );
+};
+
+FormDropdown.propTypes = {
+  field: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+    onChange: PropTypes.func.isRequired,
+    onBlur: PropTypes.func.isRequired,
+  }),
+  form: PropTypes.shape({
+    setFieldValue: PropTypes.func.isRequired,
+    setFieldTouched: PropTypes.func.isRequired,
+  }),
+  options: PropTypes.array.isRequired,
+  errors: PropTypes.string,
+  isMulti: PropTypes.bool.isRequired,
+  touched: PropTypes.bool,
+  label: PropTypes.string.isRequired,
 };
 
 export default FormDropdown;

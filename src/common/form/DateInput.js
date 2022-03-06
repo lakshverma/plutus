@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import DatePicker, { CalendarContainer } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { getMonth, getYear } from "date-fns";
@@ -30,8 +31,17 @@ const months = [
 ];
 
 const DateInput = (props) => {
+  // console.log(props)
   const onChange = (option) => {
     props.form.setFieldValue(props.field.name, option);
+    // Third parameter is set false to skip immediate Formik validation on that call,
+    //  so instead it would get the validation result from the earlier setFieldValue call (which, presumably, has the correct values).
+    // This is a workaround for a known bug with Formik library. More info: https://github.com/jaredpalmer/formik/issues/2457
+    props.form.setFieldTouched(props.field.name, true, false);
+  };
+
+  const onBlur = () => {
+    props.form.setFieldTouched(props.field.name, true);
   };
 
   return (
@@ -90,6 +100,7 @@ const DateInput = (props) => {
       )}
       selected={props.field.value}
       onChange={onChange}
+      onBlur={onBlur}
       calendarContainer={MyContainer}
       customInput={
         <TextInput
@@ -106,6 +117,24 @@ const DateInput = (props) => {
       disabledKeyboardNavigation
     />
   );
+};
+
+DateInput.propTypes = {
+  field: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
+      .isRequired,
+  }),
+  form: PropTypes.shape({
+    setFieldValue: PropTypes.func.isRequired,
+    setFieldTouched: PropTypes.func.isRequired,
+  }),
+  errors: PropTypes.string,
+  touched: PropTypes.bool,
+  label: PropTypes.string,
+  width: PropTypes.string,
+  placeholder: PropTypes.string,
+  iconClass: PropTypes.string.isRequired,
 };
 
 export default DateInput;

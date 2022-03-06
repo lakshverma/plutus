@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import TextInput from "../../common/form/TextInput";
@@ -52,6 +53,7 @@ const LoginForm = ({ className }) => {
             name="password"
             label="Password"
             as={TextInput}
+            type="password"
             width="lg"
             placeholder="Enter password"
             iconClass="las la-lock"
@@ -81,5 +83,9 @@ const LoginForm = ({ className }) => {
     </div>
   );
 };
+
+LoginForm.propTypes = {
+  className: PropTypes.string,
+}
 
 export default LoginForm;

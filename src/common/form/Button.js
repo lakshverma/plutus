@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Button = ({ buttonText, type, colorVariant, width }) => {
   const buttonClasses =
@@ -9,10 +10,7 @@ const Button = ({ buttonText, type, colorVariant, width }) => {
       : colorVariant === "inactive"
       ? "text-primary-grey-plutus bg-lightgrey-plutus"
       : "";
-  const widthClass =
-    width === "lg"
-      ? "w-[252px]"
-      : "w-[178px]";
+  const widthClass = width === "lg" ? "w-[252px]" : "w-[178px]";
 
   return (
     <button
@@ -22,6 +20,14 @@ const Button = ({ buttonText, type, colorVariant, width }) => {
       {buttonText}
     </button>
   );
+};
+
+Button.propTypes = {
+  buttonText: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  colorVariant: PropTypes.oneOf(["primary", "secondary", "inactive"])
+    .isRequired,
+  width: PropTypes.string,
 };
 
 export default Button;
