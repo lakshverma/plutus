@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import TextInput from "../../common/form/TextInput";
@@ -71,9 +72,11 @@ const LoginForm = ({ className }) => {
                 labelType="bold"
                 className="mt-8 mb-8"
             />
+            <Link to="/recover">
             <span className="text-sm font-bold text-primary-blue-plutus font-lato">
                 Recover password
             </span>
+            </Link>
           </div>
           <ErrorMessage component={ErrorText} name="remember" />
           <Button buttonText="Sign In" type="submit" colorVariant="primary" />
