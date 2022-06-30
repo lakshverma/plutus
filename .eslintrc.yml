@@ -1,0 +1,27 @@
+extends:
+  - airbnb
+  - airbnb/hooks
+rules:
+  no-restricted-syntax: off
+  jsx-a11y/label-has-associated-control: off
+  react/jsx-filename-extension:
+    - 1
+    - extensions:
+        - .js
+        - .jsx
+  react/function-component-definition:
+    - 1
+    - 
+      namedComponents: 
+        - function-declaration
+        - function-expression
+        - arrow-function
+      unnamedComponents:
+        - function-expression
+        - arrow-function
+env:
+  browser: true
+
+
+
+

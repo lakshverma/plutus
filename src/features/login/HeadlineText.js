@@ -1,8 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const HeadlineText = ({ className, head, head2, subhead }) => {
-   const head2Class = head2 ? "text-[32px] font-bold font-lato text-primary-dark-plutus leading-11half" : "hidden";
+const HeadlineText = ({
+  className, head, head2, subhead,
+}) => {
+  const head2Class = head2 ? 'text-[32px] font-bold font-lato text-primary-dark-plutus leading-11half' : 'hidden';
   return (
     <div className={className}>
       <h1 className="text-[32px] font-bold font-lato text-primary-dark-plutus leading-11half">
@@ -19,10 +21,15 @@ const HeadlineText = ({ className, head, head2, subhead }) => {
 };
 
 HeadlineText.propTypes = {
-  className: PropTypes.string,
+  className: PropTypes.string.isRequired,
   head: PropTypes.string.isRequired,
   head2: PropTypes.string,
   subhead: PropTypes.string,
+};
+
+HeadlineText.defaultProps = {
+  head2: '',
+  subhead: '',
 };
 
 export default HeadlineText;

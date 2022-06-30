@@ -1,32 +1,31 @@
-import React, { forwardRef } from "react";
-import PropTypes from "prop-types"
+import React, { forwardRef } from 'react';
+import PropTypes from 'prop-types';
 
-// Accepts  name, label, width, placeholder, iconClass and error as props in addition to the standard Formik props for text inputs.
-// React Datepicker library needs the forward ref to use this component as a customInput.
+// Accepts  name, label, width, placeholder, iconClass and error as props in addition to the
+// standard Formik props for text inputs. React Datepicker library needs the forward ref to use this
+// component as a customInput.
 const TextInput = forwardRef((props, ref) => {
-  const validationClass =
-    props.errors && props.touched
-      ? {
-          div: "focus-within:text-secondary-pink-plutus border-secondary-pink-plutus",
-          input: "text-secondary-pink-plutus",
-          icon: "text-secondary-pink-plutus",
-        }
-      : {
-          div: "focus-within:text-primary-dark-plutus border-outline-grey-plutus focus-within:border-primary-blue-plutus",
-          input: "primary-dark-plutus",
-          icon: "primary-dark-plutus",
-        };
+  const validationClass = props.errors && props.touched
+    ? {
+      div: 'focus-within:text-secondary-pink-plutus border-secondary-pink-plutus',
+      input: 'text-secondary-pink-plutus',
+      icon: 'text-secondary-pink-plutus',
+    }
+    : {
+      div: 'focus-within:text-primary-dark-plutus border-outline-grey-plutus focus-within:border-primary-blue-plutus',
+      input: 'primary-dark-plutus',
+      icon: 'primary-dark-plutus',
+    };
 
-  const width =
-    props.width === "lg"
-      ? {
-          div: "w-[361px]",
-          input: "w-[343px]",
-        }
-      : {
-          div: "w-[269px]",
-          input: "w-[251px]",
-        };
+  const width = props.width === 'lg'
+    ? {
+      div: 'w-[361px]',
+      input: 'w-[343px]',
+    }
+    : {
+      div: 'w-[269px]',
+      input: 'w-[251px]',
+    };
   return (
     <>
       <label className="block text-sm text-primary-grey-plutus font-lato">
@@ -49,7 +48,8 @@ const TextInput = forwardRef((props, ref) => {
         <i
           className={`${props.iconClass} ${validationClass.icon} peer-placeholder-shown:text-primary-grey-plutus`}
           onClick={props.onClick}
-        ></i>
+          role="presentation"
+        />
       </div>
     </>
   );
@@ -67,6 +67,21 @@ TextInput.propTypes = {
   iconClass: PropTypes.string,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
-}
+  onClick: PropTypes.func,
+};
+
+TextInput.defaultProps = {
+  errors: '',
+  touched: false,
+  name: '',
+  type: '',
+  value: '',
+  width: '',
+  placeholder: '',
+  iconClass: '',
+  onChange: null,
+  onBlur: null,
+  onClick: null,
+};
 
 export default TextInput;
