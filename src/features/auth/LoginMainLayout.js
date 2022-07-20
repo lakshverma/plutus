@@ -25,12 +25,13 @@ const LoginMainLayout = ({
 
 LoginMainLayout.propTypes = {
   headline: PropTypes.element.isRequired,
-  form: PropTypes.element.isRequired,
+  form: PropTypes.element,
   img: PropTypes.element.isRequired,
   customWidth: PropTypes.string,
 };
 
 LoginMainLayout.defaultProps = {
+  form: null,
   customWidth: '361px',
 };
 

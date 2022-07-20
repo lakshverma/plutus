@@ -3,7 +3,11 @@ extends:
   - airbnb/hooks
 rules:
   no-restricted-syntax: off
+  no-param-reassign:
+    - error
+    - props: false
   jsx-a11y/label-has-associated-control: off
+  react/forbid-prop-types: off
   react/jsx-filename-extension:
     - 1
     - extensions:
@@ -19,6 +23,8 @@ rules:
       unnamedComponents:
         - function-expression
         - arrow-function
+parserOptions:
+  ecmaVersion: 2020
 env:
   browser: true
 
