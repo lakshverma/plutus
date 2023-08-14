@@ -40,8 +40,9 @@ const TextInput = forwardRef((props, ref) => {
           onClick={props.onClick}
           name={props.name}
           value={props.value}
-          className={`mt-1 pb-[14px] text-sm font-bold outline-none font-lato ${width.input} placeholder:text-primary-grey-plutus peer ${validationClass.input}`}
+          className={`mt-2 pb-5 text-sm font-bold outline-none font-lato ${width.input} placeholder:text-primary-grey-plutus peer ${validationClass.input}`}
           type={props.type}
+          pattern={props.pattern ? props.pattern : undefined}
           placeholder={props.placeholder}
           ref={ref}
         />
@@ -61,8 +62,9 @@ TextInput.propTypes = {
   label: PropTypes.string.isRequired,
   name: PropTypes.string,
   type: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   width: PropTypes.string,
+  pattern: PropTypes.string,
   placeholder: PropTypes.string,
   iconClass: PropTypes.string,
   onChange: PropTypes.func,
@@ -77,6 +79,7 @@ TextInput.defaultProps = {
   type: '',
   value: '',
   width: '',
+  pattern: '',
   placeholder: '',
   iconClass: '',
   onChange: null,

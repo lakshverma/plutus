@@ -160,7 +160,7 @@ const FormDropdown = ({
 FormDropdown.propTypes = {
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.array]).isRequired,
     onChange: PropTypes.func.isRequired,
     onBlur: PropTypes.func.isRequired,
   }).isRequired,

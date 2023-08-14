@@ -11,6 +11,7 @@
     "axios": "^0.27.2",
     "date-fns": "^2.28.0",
     "formik": "^2.2.9",
+    "libphonenumber-js": "^1.10.13",
     "lodash": "^4.17.21",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
@@ -45,6 +46,7 @@
   },
   "proxy": "http://localhost:3003",
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "autoprefixer": "^10.4.2",
     "eslint": "^8.18.0",
     "eslint-config-airbnb": "^19.0.4",
