@@ -20,8 +20,6 @@ const testOptions = [
 
 const NewContactContent = () => (
   <div className="flex justify-center w-full h-full pb-4">
-    {/* Remove height 96% constraint and add margin top and bottom instead to fix the overflow issue
-    We could also apply padding to the parent div to solve this. */}
     <div className="w-[96%] bg-white rounded-lg">
       <Formik
         initialValues={{
