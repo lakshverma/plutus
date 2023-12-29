@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 // components
+import { ToastContainer, Slide } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import RequireAuth from '../common/RequireAuth';
 import TestForm from '../common/form/TestForm';
 import Recover from '../features/auth/Recover';
@@ -14,6 +16,8 @@ import Missing from '../common/Missing';
 import userService from '../features/auth/userService';
 // reducers and action creators
 import { login } from '../features/auth/authSlice';
+import EmptyContact from '../features/contact/EmptyContact';
+import NewContact from '../features/contact/NewContact';
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +39,8 @@ function App() {
 
         {/* protected routes */}
         <Route element={<RequireAuth allowedRoles={[2]} />}>
+          <Route path="/contacts/new" element={<NewContact />} />
+          <Route path="/contacts" element={<EmptyContact />} />
           <Route path="/home" element={<TestForm />} />
         </Route>
 
@@ -43,6 +49,7 @@ function App() {
         {/* catch all */}
         <Route path="*" element={<Missing />} />
       </Routes>
+      <ToastContainer position="top-center" autoClose={5000} hideProgressBar transition={Slide} theme="colored" />
     </div>
   );
 }
