@@ -40,7 +40,9 @@ const TextInput = forwardRef((props, ref) => {
           onClick={props.onClick}
           name={props.name}
           value={props.value}
-          className={`mt-2 pb-5 text-sm font-bold outline-none font-lato ${width.input} placeholder:text-primary-grey-plutus peer ${validationClass.input}`}
+          disabled={props.disabled}
+          autoComplete={props.autoComplete}
+          className={`mt-2 pb-5 text-sm font-bold outline-none font-lato ${width.input} placeholder:text-primary-grey-plutus peer ${validationClass.input} autofill:bg-transparent autofill:shadow-[0_0_0px_1000px_white_inset]`}
           type={props.type}
           pattern={props.pattern ? props.pattern : undefined}
           placeholder={props.placeholder}
@@ -70,6 +72,9 @@ TextInput.propTypes = {
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
   onClick: PropTypes.func,
+  disabled: PropTypes.bool,
+  autoComplete: PropTypes.string,
+
 };
 
 TextInput.defaultProps = {
@@ -85,6 +90,8 @@ TextInput.defaultProps = {
   onChange: null,
   onBlur: null,
   onClick: null,
+  disabled: false,
+  autoComplete: 'off',
 };
 
 export default TextInput;

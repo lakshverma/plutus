@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
+import AsyncSelect from 'react-select/async';
 
-// Defining the theme colors here instead of relying on tailwind.config.js as we're not
-// using Tailwind to style this component. By default, React-select library
-// uses emotion.sh for styling.
 const colors = {
   primaryBluePlutus: '#5E81F4',
   primaryDarkPlutus: '#1C1D21',
@@ -20,37 +18,66 @@ const FormDropdown = ({
   field,
   form,
   options,
+  defaultOptions,
   errors,
   isMulti,
+  isLoading,
+  loadingMessage,
   touched,
   label,
+  placeholder,
+  isAsyncDropdown,
+  loadOptions,
+  disabled,
+  width,
 }) => {
-  const onChange = (option) => {
-    form.setFieldValue(
-      field.name,
-      isMulti ? option.map((item) => item.value) : option.value,
-    );
+  const wrapperWidth = typeof width === 'number' ? `${width}px` : width;
+  const resolvedWrapperWidth = wrapperWidth || `${FormDropdown.defaultProps.width}px`;
+
+  const getOptionSource = () => {
+    if (Array.isArray(options) && options.length > 0) {
+      return options;
+    }
+    if (Array.isArray(defaultOptions) && defaultOptions.length > 0) {
+      return defaultOptions;
+    }
+    return [];
   };
 
   const getValue = () => {
-    if (options) {
-      return isMulti
-        ? options.filter((option) => field.value.indexOf(option.value) >= 0)
-        : options.find((option) => option.value === field.value);
+    const optionSource = getOptionSource();
+    if (!optionSource.length && !field.value) {
+      return null;
     }
-    return isMulti ? [] : '';
+
+    if (isMulti && Array.isArray(field.value)) {
+      return optionSource.filter((option) => field.value.includes(option.value));
+    }
+
+    return optionSource.find((option) => option.value === field.value) || null;
   };
-  // The customStyles object contains style keys (controlling different aspects of the dropdown).
-  // The react keys accept a function with provided and state as args. Spreading the provided styles
-  // into your returned object lets you extend it while State gives access to props passed to the
-  // Select component body.
+
+  const handleSelectChange = (selectedOption) => {
+    if (isMulti) {
+      const valueArray = Array.isArray(selectedOption)
+        ? selectedOption.map((option) => option.value)
+        : [];
+      form.setFieldValue(field.name, valueArray);
+      return;
+    }
+
+    form.setFieldValue(field.name, selectedOption ? selectedOption.value : '');
+  };
+
+  const sharedStyles = {
+    width: '100%',
+  };
+
   const customStyles = {
     option: (provided, state) => ({
       ...provided,
       borderBottom: 'none',
-      color: state.isSelected
-        ? colors.backgroundLight
-        : colors.primaryDarkPlutus,
+      color: state.isSelected ? colors.backgroundLight : colors.primaryDarkPlutus,
       backgroundColor: state.isSelected ? colors.primaryBluePlutus : 'white',
       '&:hover': {
         color: colors.primaryBluePlutus,
@@ -61,35 +88,25 @@ const FormDropdown = ({
     }),
     control: (provided) => ({
       ...provided,
-      width: 361,
+      ...sharedStyles,
       border: '0px',
-      borderBottom:
-        errors && touched
-          ? `2px solid ${colors.secondaryPinkPlutus}`
-          : `2px solid ${colors.outlineGreyPlutus}`,
+      borderBottom: errors && touched
+        ? `2px solid ${colors.secondaryPinkPlutus}`
+        : `2px solid ${colors.outlineGreyPlutus}`,
       borderRadius: 0,
       boxShadow: 'none',
       color: colors.primaryGreyPlutus,
-      '&:focus': {
-        color: 'pink',
-      },
-      '&:hover': {},
     }),
-    singleValue: (provided, state) => {
-      const opacity = state.isDisabled ? 0.5 : 1;
-      const transition = 'opacity 300ms';
-
-      return {
-        ...provided,
-        opacity,
-        transition,
-        fontFamily: 'Lato',
-        fontSize: 14,
-        fontWeight: 'bold',
-        marginLeft: 0,
-        color: colors.primaryDarkPlutus,
-      };
-    },
+    singleValue: (provided, state) => ({
+      ...provided,
+      opacity: state.isDisabled ? 0.5 : 1,
+      transition: 'opacity 300ms',
+      fontFamily: 'Lato',
+      fontSize: 14,
+      fontWeight: 'bold',
+      marginLeft: 0,
+      color: colors.primaryDarkPlutus,
+    }),
     multiValue: (provided) => ({
       ...provided,
       fontFamily: 'Lato',
@@ -110,11 +127,9 @@ const FormDropdown = ({
       backgroundColor: colors.backgroundLight,
     }),
     dropdownIndicator: (provided, state) => ({
+      ...provided,
       backgroundColor: 'transparent',
       color: state.isFocused ? colors.primaryDarkPlutus : 'inherit',
-      '&:focus': {
-        color: 'pink',
-      },
     }),
     indicatorSeparator: () => ({}),
     valueContainer: (provided) => ({
@@ -124,7 +139,7 @@ const FormDropdown = ({
     }),
     menu: (provided) => ({
       ...provided,
-      width: 361,
+      width: resolvedWrapperWidth,
     }),
     placeholder: (provided) => ({
       ...provided,
@@ -135,23 +150,53 @@ const FormDropdown = ({
     }),
     container: (provided) => ({
       ...provided,
-      width: 361,
+      ...sharedStyles,
     }),
   };
 
+  const wrapperStyle = { width: resolvedWrapperWidth };
+
+  if (isAsyncDropdown) {
+    return (
+      <div className="inline-block w-full" style={wrapperStyle}>
+        <label className="block text-sm text-primary-grey-plutus font-lato">
+          {label}
+        </label>
+        <AsyncSelect
+          name={field.name}
+          value={getValue()}
+          placeholder={placeholder}
+          onChange={handleSelectChange}
+          onBlur={field.onBlur}
+          defaultOptions={defaultOptions || options}
+          loadOptions={loadOptions}
+          styles={customStyles}
+          isMulti={isMulti}
+          isLoading={isLoading}
+          loadingMessage={loadingMessage}
+          isDisabled={disabled}
+        />
+      </div>
+    );
+  }
+
   return (
-    <div className="inline-block">
+    <div className="inline-block w-full" style={wrapperStyle}>
       <label className="block text-sm text-primary-grey-plutus font-lato">
         {label}
       </label>
       <Select
         name={field.name}
         value={getValue()}
-        onChange={onChange}
+        onChange={handleSelectChange}
         onBlur={field.onBlur}
         options={options}
+        placeholder={placeholder}
         styles={customStyles}
         isMulti={isMulti}
+        isLoading={isLoading}
+        loadingMessage={loadingMessage}
+        isDisabled={disabled}
       />
     </div>
   );
@@ -160,7 +205,12 @@ const FormDropdown = ({
 FormDropdown.propTypes = {
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.array]).isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.bool,
+      PropTypes.array,
+      PropTypes.number,
+    ]).isRequired,
     onChange: PropTypes.func.isRequired,
     onBlur: PropTypes.func.isRequired,
   }).isRequired,
@@ -168,16 +218,33 @@ FormDropdown.propTypes = {
     setFieldValue: PropTypes.func.isRequired,
     setFieldTouched: PropTypes.func.isRequired,
   }).isRequired,
-  options: PropTypes.arrayOf(PropTypes.object).isRequired,
+  options: PropTypes.arrayOf(PropTypes.object),
+  defaultOptions: PropTypes.arrayOf(PropTypes.object),
+  placeholder: PropTypes.string,
   errors: PropTypes.string,
   isMulti: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
+  loadingMessage: PropTypes.func,
   touched: PropTypes.bool,
   label: PropTypes.string.isRequired,
+  isAsyncDropdown: PropTypes.bool,
+  loadOptions: PropTypes.func,
+  disabled: PropTypes.bool,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
 FormDropdown.defaultProps = {
+  options: [],
+  defaultOptions: [],
+  placeholder: 'Select...',
   errors: '',
+  isLoading: false,
+  loadingMessage: () => 'Loading options...',
   touched: false,
+  isAsyncDropdown: false,
+  loadOptions: () => Promise.resolve([]),
+  disabled: false,
+  width: 361,
 };
 
 export default FormDropdown;

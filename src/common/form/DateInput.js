@@ -13,7 +13,7 @@ const MyContainer = ({ className, children }) => (
   </CalendarContainer>
 );
 
-const years = range(1990, getYear(new Date()) + 1, 1);
+const years = range(1900, getYear(new Date()) + 1, 1);
 const months = [
   'January',
   'February',
@@ -30,7 +30,7 @@ const months = [
 ];
 
 const DateInput = ({
-  form, field, errors, touched, label, width, placeholder, iconClass,
+  form, field, errors, label, width, placeholder, iconClass, disabled, meta, maxDate,
 }) => {
   // console.log(props)
   const onChange = (option) => {
@@ -48,6 +48,8 @@ const DateInput = ({
 
   return (
     <DatePicker
+      disabled={disabled}
+      maxDate={maxDate}
       renderCustomHeader={({
         date,
         changeYear,
@@ -59,6 +61,7 @@ const DateInput = ({
       }) => (
         <div className="flex justify-center m-3 bg-background-lightgrey-plutus">
           <button
+            type="button"
             onClick={decreaseMonth}
             disabled={prevMonthButtonDisabled}
             className="pr-8 text-xl font-bold font-lato text-primary-grey-plutus"
@@ -90,6 +93,7 @@ const DateInput = ({
           </select>
 
           <button
+            type="button"
             onClick={increaseMonth}
             disabled={nextMonthButtonDisabled}
             className="pl-8 text-xl font-bold font-lato text-primary-grey-plutus"
@@ -105,9 +109,10 @@ const DateInput = ({
       calendarContainer={MyContainer}
       customInput={(
         <TextInput
+          disabled={disabled}
           label={label}
           errors={errors}
-          touched={touched}
+          touched={meta.touched}
           width={width}
           placeholder={placeholder}
           iconClass={iconClass}
@@ -116,6 +121,7 @@ const DateInput = ({
       placeholderText={placeholder}
       dateFormat="dd/MM/yyyy"
       disabledKeyboardNavigation
+      onChangeRaw={(e) => e.preventDefault()}
     />
   );
 };
@@ -123,12 +129,19 @@ const DateInput = ({
 DateInput.propTypes = {
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
-      .isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.instanceOf(Date),
+      PropTypes.oneOf([null]),
+    ]),
   }),
   form: PropTypes.shape({
     setFieldValue: PropTypes.func.isRequired,
     setFieldTouched: PropTypes.func.isRequired,
+  }),
+  meta: PropTypes.shape({
+    touched: PropTypes.bool,
+    error: PropTypes.string,
   }),
   errors: PropTypes.string,
   touched: PropTypes.bool,
@@ -136,16 +149,24 @@ DateInput.propTypes = {
   width: PropTypes.string,
   placeholder: PropTypes.string,
   iconClass: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
+  maxDate: PropTypes.instanceOf(Date),
 };
 
 DateInput.defaultProps = {
   field: {},
   form: {},
+  meta: {
+    touched: false,
+    error: '',
+  },
   errors: '',
   touched: false,
   label: '',
   width: '',
   placeholder: '',
+  disabled: false,
+  maxDate: undefined,
 };
 
 MyContainer.propTypes = {
