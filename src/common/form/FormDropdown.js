@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import AsyncSelect from 'react-select/async';
@@ -31,6 +31,8 @@ const FormDropdown = ({
   disabled,
   width,
 }) => {
+  const [selectedAsyncOption, setSelectedAsyncOption] = useState(null);
+
   const wrapperWidth = typeof width === 'number' ? `${width}px` : width;
   const resolvedWrapperWidth = wrapperWidth || `${FormDropdown.defaultProps.width}px`;
 
@@ -51,11 +53,46 @@ const FormDropdown = ({
     }
 
     if (isMulti && Array.isArray(field.value)) {
-      return optionSource.filter((option) => field.value.includes(option.value));
+      const selectedValues = field.value.map((value) => String(value));
+      return optionSource.filter((option) => selectedValues.includes(String(option.value)));
     }
 
-    return optionSource.find((option) => option.value === field.value) || null;
+    return optionSource.find((option) => String(option.value) === String(field.value)) || null;
   };
+
+  useEffect(() => {
+    if (!isAsyncDropdown || isMulti) {
+      return;
+    }
+
+    if (field.value == null || field.value === '') {
+      setSelectedAsyncOption(null);
+      return;
+    }
+
+    const optionSource = Array.isArray(options) && options.length > 0
+      ? options
+      : defaultOptions;
+
+    const matchedOption = optionSource.find(
+      (option) => String(option.value) === String(field.value),
+    );
+
+    if (matchedOption) {
+      setSelectedAsyncOption(matchedOption);
+      return;
+    }
+
+    setSelectedAsyncOption((previous) => (
+      previous && String(previous.value) === String(field.value) ? previous : null
+    ));
+  }, [
+    isAsyncDropdown,
+    isMulti,
+    field.value,
+    options,
+    defaultOptions,
+  ]);
 
   const handleSelectChange = (selectedOption) => {
     if (isMulti) {
@@ -64,6 +101,10 @@ const FormDropdown = ({
         : [];
       form.setFieldValue(field.name, valueArray);
       return;
+    }
+
+    if (isAsyncDropdown) {
+      setSelectedAsyncOption(selectedOption || null);
     }
 
     form.setFieldValue(field.name, selectedOption ? selectedOption.value : '');
@@ -164,7 +205,7 @@ const FormDropdown = ({
         </label>
         <AsyncSelect
           name={field.name}
-          value={getValue()}
+          value={isMulti ? getValue() : (selectedAsyncOption || getValue())}
           placeholder={placeholder}
           onChange={handleSelectChange}
           onBlur={field.onBlur}
