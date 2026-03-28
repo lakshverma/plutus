@@ -1,40 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
-import ContentBody from './ContentBody';
-import ContentHeader from './ContentHeader';
 import SideBar from './SideBar';
+import ContentHeader from './ContentHeader';
+import ContentBody from './ContentBody';
 
 const Content = ({
-  bodyContentElement, headerText, headerButtons, sideBar,
+  bodyContentElement, headerText, headerButtons, sideBarContentElement, bodyBgClass,
 }) => {
-  if (sideBar) {
+  if (sideBarContentElement) {
     return (
-      <div className="grid grid-cols-12 grid-rows-12">
-        <SideBar />
-        <ContentHeader headerText={headerText} headerButtons={headerButtons} />
-        <ContentBody bodyContentElement={bodyContentElement} />
+      <div className="grid h-screen grid-cols-12 grid-rows-[auto_1fr]">
+        <SideBar sideBarContentElement={sideBarContentElement} />
+        <ContentHeader
+          headerText={headerText}
+          headerButtons={headerButtons}
+        />
+        <ContentBody
+          bodyContentElement={bodyContentElement}
+          bodyBgClass={bodyBgClass}
+        />
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-12 grid-rows-[fit-content(10%) repeat(11, minmax(0, 1fr)]">
-      <ContentHeader headerText={headerText} headerButtons={headerButtons} fullSize />
-      <ContentBody bodyContentElement={bodyContentElement} fullSize />
+    <div className="grid h-screen grid-cols-12 grid-rows-[auto_1fr]">
+      <ContentHeader
+        headerText={headerText}
+        headerButtons={headerButtons}
+        fullSize
+      />
+      <ContentBody
+        bodyContentElement={bodyContentElement}
+        fullSize
+      />
     </div>
   );
 };
 
 Content.propTypes = {
+  sideBarContentElement: PropTypes.element,
   bodyContentElement: PropTypes.element.isRequired,
+  bodyBgClass: PropTypes.string,
   headerText: PropTypes.string.isRequired,
   headerButtons: PropTypes.arrayOf(PropTypes.object).isRequired,
-  sideBar: PropTypes.bool,
 };
 
 Content.defaultProps = {
-  sideBar: false,
+  sideBarContentElement: null,
+  bodyBgClass: 'bg-white',
 };
 
 export default Content;

@@ -10,29 +10,35 @@ import Content from './Content';
 // 3. button classes for square buttons in Content Header, number of square buttons
 // 4. Optional Sidebar element that puts stuff inside the sidebar (if needed)
 
+// To add buttons to the header, add an object with icon class and action, as an array
+// element. The search button appears by default. Other buttons appear in the order of their
+// position inside the array.
 const AppLayout = ({
-  bodyContentElement, headerText, headerButtons, sideBar,
+  bodyContentElement, bodyBgClass, headerText, headerButtons, sideBarContentElement,
 }) => (
   <div className="grid h-screen grid-cols-custom-sidenav-layout">
     <SideNav />
     <Content
       bodyContentElement={bodyContentElement}
+      bodyBgClass={bodyBgClass}
       headerText={headerText}
       headerButtons={headerButtons}
-      sideBar={sideBar}
+      sideBarContentElement={sideBarContentElement}
     />
   </div>
 );
 
 AppLayout.propTypes = {
   bodyContentElement: PropTypes.element.isRequired,
+  bodyBgClass: PropTypes.string,
   headerText: PropTypes.string.isRequired,
   headerButtons: PropTypes.arrayOf(PropTypes.object).isRequired,
-  sideBar: PropTypes.bool,
+  sideBarContentElement: PropTypes.element,
 };
 
 AppLayout.defaultProps = {
-  sideBar: false,
+  sideBarContentElement: null,
+  bodyBgClass: 'bg-white',
 };
 
 export default AppLayout;

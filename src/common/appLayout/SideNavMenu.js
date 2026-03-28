@@ -5,7 +5,7 @@ function SideNavMenu() {
   return (
     <nav className="space-y-4">
       <NavItem link="/contacts" iconClass="las la-user-lock" />
-      <NavItem link="/reports" iconClass="las la-tachometer-alt" />
+      <NavItem link="/reports" iconClass="las la-chart-bar" />
       <NavItem link="/settings" iconClass="las la-cog" />
     </nav>
   );

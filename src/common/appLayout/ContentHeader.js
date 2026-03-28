@@ -4,22 +4,23 @@ import PropTypes from 'prop-types';
 import SqButton from './sqButton';
 import SearchDialog from '../../features/search/SearchDialog';
 
-// To add buttons to the header, add an object with icon class and action, as an array
-// element. The search button appears by default. Other buttons appear in the order of their
-// position inside the array.
+// To add buttons to the header, pass objects { class, action } in headerButtons.
+// Search now always appears last.
 const ContentHeader = ({ headerText, headerButtons, fullSize }) => (
-  <div className={`flex justify-between items-center ${fullSize ? 'col-span-full' : 'col-span-9'} row-span-1 bg-background-lightgrey-plutus`}>
-    <h3 className="my-3 ml-10 text-xl font-semibold font-lato text-primary-dark-plutus">
+  <div className={`flex justify-between items-center ${fullSize ? 'col-span-full' : 'col-span-9'} row-start-1 bg-background-lightgrey-plutus px-10 py-3`}>
+    <h3 className="text-xl font-semibold font-lato text-primary-dark-plutus">
       {headerText}
     </h3>
-    <div className="flex space-x-2 text-2xl mr-7 text-primary-grey-plutus">
-      <SearchDialog />
+    <div className="flex space-x-2 text-2xl text-primary-grey-plutus">
       {headerButtons.map((button, index) => (
-        // Since this is a array of button components that is static, we use index as key.
-        // Alternatively, we'd need to map over the array as we init it and give it unique ids.
-        // eslint-disable-next-line react/no-array-index-key
-        <SqButton key={index} buttonClass={button.class} action={button.action} />
+        <SqButton
+          // eslint-disable-next-line react/no-array-index-key
+          key={index}
+          action={button.action}
+          buttonClass={button.class}
+        />
       ))}
+      <SearchDialog />
     </div>
   </div>
 );
