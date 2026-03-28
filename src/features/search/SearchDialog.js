@@ -48,16 +48,16 @@ const SearchDialog = () => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <span className="p-[0.625rem] rounded-lg bg-outline-grey-plutus hover:bg-primary-blue-plutus hover:text-white my-3">
+        <span className="block p-[0.625rem] rounded-lg bg-outline-grey-plutus hover:bg-primary-blue-plutus hover:text-white my-3">
           <i className="las la-search" />
         </span>
       </Dialog.Trigger>
       <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 bg-primary-dark-plutus/30" />
+        <Dialog.Overlay className="fixed inset-0 z-40 bg-primary-dark-plutus/30" />
         {
           // When there are search results
           ((searchResultsState.status === 200 && searchResultsState.data !== '' && Array.isArray(searchResultsState.data) && searchResultsState.data.length !== 0)) && (
-          <Dialog.Content className="fixed flex w-7/12 -translate-x-1/2 bg-white shadow h-1/2 rounded-xl left-1/2 top-32">
+          <Dialog.Content className="fixed z-50 flex w-7/12 -translate-x-1/2 bg-white shadow h-1/2 rounded-xl left-1/2 top-32">
             <Dialog.Title className="flex flex-col w-full rounded-xl">
               <div className="p-3 text-sm border-b-2 sm:text-lg md:text-xl lg:text-3xl text-primary-grey-plutus">
                 <i className="-rotate-90 las la-search" />
@@ -83,7 +83,7 @@ const SearchDialog = () => {
           // When there are no search results
           (searchResultsState.status === 200 && Array.isArray(searchResultsState.data)
           && searchResultsState.data.length === 0) && (
-          <Dialog.Content className="fixed w-7/12 h-20 p-3 -translate-x-1/2 bg-white shadow sm md:h-24 lg:h-80 rounded-xl left-1/2 top-32">
+          <Dialog.Content className="fixed z-50 w-7/12 h-20 p-3 -translate-x-1/2 bg-white shadow sm md:h-24 lg:h-80 rounded-xl left-1/2 top-32">
             <Dialog.Title className="text-base md:text-xl lg:text-3xl text-primary-grey-plutus">
               <i className="-rotate-90 las la-search" />
               <input value={searchValue} onChange={performSearch} className="w-11/12 sm:ml-2 focus:outline-white caret-primary-blue-plutus" placeholder="Type to search a contact, activity or task" />
@@ -101,7 +101,7 @@ const SearchDialog = () => {
           // When the search hasn't been made yet/Search state is empty.
           // Need to add a case when status code is not 200
           !searchResultsState && (
-          <Dialog.Content className="fixed w-7/12 h-12 p-3 -translate-x-1/2 bg-white shadow sm md:h-14 lg:h-16 rounded-xl left-1/2 top-32">
+          <Dialog.Content className="fixed z-50 w-7/12 h-12 p-3 -translate-x-1/2 bg-white shadow sm md:h-14 lg:h-16 rounded-xl left-1/2 top-32">
             <Dialog.Title className="text-sm sm:text-base md:text-xl lg:text-3xl text-primary-grey-plutus">
               <i className="-rotate-90 las la-search" />
               <input value={searchValue} onChange={performSearch} className="w-11/12 ml-2 focus:outline-white caret-primary-blue-plutus" placeholder="Type to search a contact, activity or task" />
