@@ -13,6 +13,8 @@ module.exports = {
         'primary-grey-plutus': '#8181A5',
         'outline-grey-plutus': '#F0F0F3',
         'secondary-pink-plutus': '#FF808B',
+        'secondary-yellow-plutus': '#F4BE5E',
+        'secondary-green-plutus': '#7CE7AC',
         'skyblue-plutus': '#EEF2FE',
         'lightgrey-plutus': '#F6F6F6',
         'background-lightgrey-plutus': '#F5F5FA',
