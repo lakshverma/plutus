@@ -18,13 +18,6 @@ import Button from '../../common/form/Button';
 import contactService from './ContactService';
 import ClearDependentFields from './ClearDependentFields';
 
-// const testOptions = [
-//   { value: 'chocolate', label: 'Chocolate' },
-//   { value: 'strawberry', label: 'Strawberry' },
-//   { value: 'vanilla', label: 'Vanilla' },
-//   { value: 'blueberry', label: 'Blueberry' },
-// ];
-
 const LoadingMessage = () => <BeatLoader size={10} color="blue" />;
 
 const NewContactContent = () => {
@@ -111,7 +104,7 @@ const NewContactContent = () => {
                 is: true,
                 then: Yup.mixed()
                   .nullable()
-                  .test('must-be-empty', 'Remove the group head name value — this contact is the group head', (val) => val === null || val === undefined || val === '' || String(val).trim() === ''),
+                  .test('must-be-empty', 'Remove the group head name value - this contact is the group head', (val) => val === null || val === undefined || val === ''),
                 otherwise: Yup.number()
                   .typeError('Group Head Name must be a number')
                   .required('An existing group code must be selected if contact is not a group head'),

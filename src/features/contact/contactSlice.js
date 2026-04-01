@@ -10,10 +10,10 @@ const contactSlice = createSlice({
   initialState,
   reducers: {
     setOptions: (state, action) => {
-      (state.options = action.payload);
+      state.options = action.payload;
     },
     setCityOptions: (state, action) => {
-      (state.cityOptions = action.payload);
+      state.cityOptions = action.payload;
     },
   },
 });
