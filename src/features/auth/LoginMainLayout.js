@@ -11,7 +11,7 @@ const LoginMainLayout = ({
         {/* This is to ensure that both the sibling elements have the same width. The headline text
         will wrap if the amount of text exceeds the max width.
         361px is the width of large form input element (including the width of the input icon) */}
-        <div className={String(maxWidth)}>
+        <div className={`${String(maxWidth)} -translate-y-4 sm:-translate-y-6`}>
           {headline}
           {form}
         </div>
