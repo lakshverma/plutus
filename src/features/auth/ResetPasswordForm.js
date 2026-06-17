@@ -6,6 +6,7 @@ import {
 } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import TextInput from '../../common/form/TextInput';
 import ErrorText from '../../common/form/ErrorText';
 import Button from '../../common/form/Button';
@@ -17,8 +18,21 @@ const ResetPasswordForm = ({ className }) => {
 
   const handleSubmit = async (values) => {
     const { password, confirmPassword } = values;
-    await authService.resetRequest({ password, confirmPassword }, params.token);
-    navigate('/', { replace: true });
+    try {
+      await authService.resetRequest({ password, confirmPassword }, params.token);
+      toast.success('Password reset successfully!', {
+        className: '!bg-primary-blue-plutus text-white font-lato',
+        progressClassName: '!bg-white',
+        icon: <i className="text-white las la-check-circle" />,
+      });
+      navigate('/', { replace: true });
+    } catch (error) {
+      toast.error('Failed to reset password. Please try again.', {
+        className: '!bg-secondary-pink-plutus text-white font-lato',
+        progressClassName: '!bg-white',
+        icon: <i className="text-white las la-exclamation-circle" />,
+      });
+    }
   };
 
   return (
