@@ -1,0 +1,7 @@
+{
+    "github.copilot.chat.commitMessageGeneration.instructions": [
+  {
+    "text": "Generate commit messages using Conventional Commits format:\n\n<type>(<scope>): <subject>\n\nOptional body and footer.\n\nRules:\n- Use one of these types: feat, fix, docs, style, refactor, perf, test, chore\n- Scope should describe the part of the code affected (e.g., auth, api, ui)\n- Subject must be concise, imperative (e.g., 'add', 'fix', not 'added') and max ~50 chars\n- Do NOT capitalize the subject\n- Do NOT end subject with a period\n\nBody:\n- Optional, add only if needed\n- Explain WHY the change was made\n- Separate from subject with a blank line\n\nFooter:\n- Optional\n- Reference issues (e.g., 'Fixes #123')\n- Include BREAKING CHANGE: if applicable\n\nOutput format strictly:\n<type>(<scope>): <subject>\n\n<body>\n\n<footer>"
+  }
+]
+}
