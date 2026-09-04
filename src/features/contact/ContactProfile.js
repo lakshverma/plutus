@@ -906,6 +906,7 @@ const ActivityTimeline = ({ tenantId, contactId }) => {
       });
     } catch (error) {
       if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console
         console.error('Activity save error:', error);
       }
       toast.error('Failed to save activity');

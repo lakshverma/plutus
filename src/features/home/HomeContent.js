@@ -33,6 +33,7 @@ const HomeContent = () => {
         });
       } catch (err) {
         if (process.env.NODE_ENV !== 'production') {
+          // eslint-disable-next-line no-console
           console.error('Error loading dashboard data:', err);
         }
         setError('Failed to load dashboard data. Please try again.');

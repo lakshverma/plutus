@@ -244,6 +244,7 @@ const ContactListContent = ({ initialData, initialError }) => {
       setSelectedRows([]);
     } catch (err) {
       if (process.env.NODE_ENV !== 'production') {
+        // eslint-disable-next-line no-console
         console.error('Failed to delete contacts:', err);
       }
       let errorMessage = 'An error occurred during contact deletion.';
