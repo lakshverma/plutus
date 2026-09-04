@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Plutus",
+  "name": "Plutus CRM",
+  "description": "A multi-tenant CRM for financial advisors.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#5E81F4",
   "background_color": "#ffffff"
 }

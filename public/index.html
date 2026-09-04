@@ -2,13 +2,30 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+
+    <!--
+      Fonts and icons come from two third-party origins. Warming the connections
+      here lets the browser overlap DNS, TCP and TLS with parsing rather than
+      paying for them serially once the stylesheets are discovered.
+    -->
+    <link rel="preconnect" href="https://maxst.icons8.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <!--
+      Lato lives here rather than as an @import at the top of index.css, because an
+      @import cannot start downloading until the stylesheet containing it has been
+      fetched and parsed, which serialises two round trips.
+    -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" />
+
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" content="#5E81F4" />
     <meta
       name="description"
-      content="Web site created using create-react-app"
+      content="Plutus is a multi-tenant CRM for financial advisors: contacts, households, activity timelines, audit history and life-event reports."
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
     <!--

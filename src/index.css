@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap');
+/* Lato is loaded by a <link> in public/index.html. An @import here would delay the
+   font request until this stylesheet had been fetched and parsed. */
 
 @tailwind base;
 @tailwind components;

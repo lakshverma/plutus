@@ -15,6 +15,16 @@ import Button from '../../common/form/Button';
 import authService from './authService';
 import userService from './userService';
 
+/*
+ * Set in the deployed environment only, so the public demo signs in with one click
+ * while local development keeps an empty form. These are inlined into the bundle at
+ * build time, which is fine: they are the published credentials of a shared demo
+ * account holding seeded data, not a secret.
+ */
+const demoEmail = process.env.REACT_APP_DEMO_EMAIL || '';
+const demoPassword = process.env.REACT_APP_DEMO_PASSWORD || '';
+const isDemo = Boolean(demoEmail && demoPassword);
+
 const LoginForm = ({ className }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -48,8 +58,8 @@ const LoginForm = ({ className }) => {
     <div className={className}>
       <Formik
         initialValues={{
-          email: '',
-          password: '',
+          email: demoEmail,
+          password: demoPassword,
           remember: false,
         }}
         validationSchema={Yup.object({
@@ -73,6 +83,15 @@ const LoginForm = ({ className }) => {
       >
         {({ errors, touched }) => (
           <Form>
+            {isDemo && (
+              <div className="p-3 mb-4 text-sm border rounded font-lato text-primary-dark-plutus bg-skyblue-plutus border-primary-blue-plutus">
+                <span className="font-bold">Demo account.</span>
+                {' '}
+                Credentials are filled in already, so just select Sign In. The data is
+                seeded and resets nightly.
+              </div>
+            )}
+
             <div className="mb-4">
               {loginError && (
                 <div className="p-3 border rounded text-secondary-pink-plutus bg-red-50 border-secondary-pink-plutus">
