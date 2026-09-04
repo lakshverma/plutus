@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - run: npx eslint src
+
+      # CI=true makes react-scripts treat lint warnings as errors, which is exactly
+      # what Vercel does. Failing here rather than at deploy time is the point.
+      - run: npm run build
+        env:
+          CI: true
