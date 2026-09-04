@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../../common/apiClient';
 import userService from '../auth/userService';
 
 const handleApiError = (error) => {
@@ -19,7 +19,7 @@ const getUsers = async () => {
   };
 
   try {
-    const response = await axios.get(`/${tenant}/auth/users`, config);
+    const response = await api.get(`/${tenant}/auth/users`, config);
     return response.data;
   } catch (error) {
     return handleApiError(error);
@@ -37,7 +37,7 @@ const createUser = async (userData) => {
   };
 
   try {
-    const response = await axios.post(`/${tenant}/auth/signup`, userData, config);
+    const response = await api.post(`/${tenant}/auth/signup`, userData, config);
     return response.data;
   } catch (error) {
     return handleApiError(error);
@@ -55,7 +55,7 @@ const updateUserRole = async ({ userId, role }) => {
   };
 
   try {
-    const response = await axios.patch(
+    const response = await api.patch(
       `/${tenant}/auth/users/${userId}/role`,
       { role },
       config,

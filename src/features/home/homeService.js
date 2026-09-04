@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../../common/apiClient';
 import userService from '../auth/userService';
 
 const getDashboardStats = async () => {
@@ -14,7 +14,7 @@ const getDashboardStats = async () => {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const response = await axios.get(baseUrl, config);
+  const response = await api.get(baseUrl, config);
   return response.data;
 };
 
@@ -31,7 +31,7 @@ const getRecentActivities = async () => {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const response = await axios.get(baseUrl, config);
+  const response = await api.get(baseUrl, config);
 
   return response.data;
 };

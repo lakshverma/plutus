@@ -1,16 +1,16 @@
-import axios from 'axios';
+import api from '../../common/apiClient';
 
 const baseUrl = '/auth';
 
 const login = async (credentials) => {
   const requestUrl = `${baseUrl}/login`;
-  const response = await axios.post(requestUrl, credentials);
+  const response = await api.post(requestUrl, credentials);
   return response.data;
 };
 
 const recoverRequest = async (credentials) => {
   const requestUrl = `${baseUrl}/request-pass`;
-  const response = await axios.post(requestUrl, credentials);
+  const response = await api.post(requestUrl, credentials);
   return response;
 };
 
@@ -19,7 +19,7 @@ const resetRequest = async (credentials, token) => {
     headers: { Authorization: `bearer ${token}` },
   };
   const requestUrl = `${baseUrl}/reset-pass`;
-  const response = await axios.post(requestUrl, credentials, config);
+  const response = await api.post(requestUrl, credentials, config);
   return response;
 };
 

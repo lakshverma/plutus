@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../../common/apiClient';
 import userService from '../auth/userService';
 
 const search = async (query) => {
@@ -16,7 +16,7 @@ const search = async (query) => {
   };
 
   const requestUrl = `${baseUrl}?q=${encodeURIComponent(query)}`;
-  const response = await axios.get(requestUrl, config);
+  const response = await api.get(requestUrl, config);
   return response;
 };
 

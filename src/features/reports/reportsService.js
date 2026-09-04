@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../../common/apiClient';
 import userService from '../auth/userService';
 
 /*
@@ -22,7 +22,7 @@ const getLifeEvents = async (params) => {
     params,
   };
 
-  const response = await axios.get(`/${tenant}/report/life-events`, config);
+  const response = await api.get(`/${tenant}/report/life-events`, config);
   return response.data;
 };
 

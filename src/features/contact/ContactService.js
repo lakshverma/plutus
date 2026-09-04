@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../../common/apiClient';
 import userService from '../auth/userService';
 
 const getDropDownOptions = async (options = 'all') => {
@@ -16,12 +16,12 @@ const getDropDownOptions = async (options = 'all') => {
 
   if (options === 'all') {
     const requestUrl = `${baseUrl}/options/all`;
-    const response = await axios.get(requestUrl, config);
+    const response = await api.get(requestUrl, config);
     return response;
   }
 
   const requestUrl = `${baseUrl}/options/city`;
-  const response = await axios.get(requestUrl, config);
+  const response = await api.get(requestUrl, config);
   return response;
 };
 
@@ -60,7 +60,7 @@ const getFilteredOptions = async (optionsType, searchTerm) => {
   }
 
   try {
-    const response = await axios.get(requestUrl, config);
+    const response = await api.get(requestUrl, config);
     return response.data;
   } catch (error) {
     return [];
@@ -81,7 +81,7 @@ const createContact = async (newContact) => {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const request = await axios.post(baseUrl, newContact, config);
+  const request = await api.post(baseUrl, newContact, config);
   return request.data;
 };
 
@@ -108,7 +108,7 @@ const getContacts = async ({ page, sortParams = {} }) => {
   };
 
   try {
-    const response = await axios.get(apiUrl, config);
+    const response = await api.get(apiUrl, config);
     if (response.data && response.data.data && response.data.pagination) {
       return response.data;
     }
@@ -132,7 +132,7 @@ const getContactById = async (contactId) => {
   };
 
   try {
-    const response = await axios.get(url, config);
+    const response = await api.get(url, config);
     return response.data;
   } catch (error) {
     throw error.response?.data || error;
@@ -153,7 +153,7 @@ const updateContact = async (contactId, updatedData) => {
   };
 
   try {
-    const response = await axios.put(url, updatedData, config);
+    const response = await api.put(url, updatedData, config);
     return response.data;
   } catch (error) {
     throw error.response?.data || error;
@@ -172,7 +172,7 @@ const deleteContact = async (contactId) => {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  await axios.delete(url, config);
+  await api.delete(url, config);
 };
 
 const batchDeleteContacts = async (contactIds) => {
@@ -188,7 +188,7 @@ const batchDeleteContacts = async (contactIds) => {
   };
   const body = { contactIds };
 
-  const response = await axios.delete(url, { ...config, data: body });
+  const response = await api.delete(url, { ...config, data: body });
   if (response.status === 204) {
     return { status: 'all_successful' };
   }
@@ -207,7 +207,7 @@ const getContactHistory = async (tenantId, contactId) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.get(
+  const response = await api.get(
     `/${tenantId}/audit/contact/${contactId}`,
     config,
   );
@@ -224,7 +224,7 @@ const getActivities = async (tenantId, contactId, params) => {
     headers: { Authorization: `Bearer ${token}` },
     params,
   };
-  const response = await axios.get(`/${tenantId}/contacts/${contactId}/activities`, config);
+  const response = await api.get(`/${tenantId}/contacts/${contactId}/activities`, config);
   return response.data;
 };
 
@@ -235,7 +235,7 @@ const createNote = async (tenantId, contactId, data) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.post(`/${tenantId}/contacts/${contactId}/notes`, data, config);
+  const response = await api.post(`/${tenantId}/contacts/${contactId}/notes`, data, config);
   return response.data;
 };
 
@@ -246,7 +246,7 @@ const updateNote = async (tenantId, contactId, noteId, data) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.put(`/${tenantId}/contacts/${contactId}/notes/${noteId}`, data, config);
+  const response = await api.put(`/${tenantId}/contacts/${contactId}/notes/${noteId}`, data, config);
   return response.data;
 };
 
@@ -257,7 +257,7 @@ const deleteNote = async (tenantId, contactId, noteId) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.delete(`/${tenantId}/contacts/${contactId}/notes/${noteId}`, config);
+  const response = await api.delete(`/${tenantId}/contacts/${contactId}/notes/${noteId}`, config);
   return response.data;
 };
 
@@ -268,7 +268,7 @@ const createCall = async (tenantId, contactId, data) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.post(`/${tenantId}/contacts/${contactId}/calls`, data, config);
+  const response = await api.post(`/${tenantId}/contacts/${contactId}/calls`, data, config);
   return response.data;
 };
 
@@ -279,7 +279,7 @@ const updateCall = async (tenantId, contactId, callId, data) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.put(`/${tenantId}/contacts/${contactId}/calls/${callId}`, data, config);
+  const response = await api.put(`/${tenantId}/contacts/${contactId}/calls/${callId}`, data, config);
   return response.data;
 };
 
@@ -290,7 +290,7 @@ const deleteCall = async (tenantId, contactId, callId) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.delete(`/${tenantId}/contacts/${contactId}/calls/${callId}`, config);
+  const response = await api.delete(`/${tenantId}/contacts/${contactId}/calls/${callId}`, config);
   return response.data;
 };
 
@@ -301,7 +301,7 @@ const getActivityOptions = async (tenantId) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
   };
-  const response = await axios.get(`/${tenantId}/activities/options`, config);
+  const response = await api.get(`/${tenantId}/activities/options`, config);
   return response.data;
 };
 
