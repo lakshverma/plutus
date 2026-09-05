@@ -14,7 +14,7 @@ import axios from 'axios';
  * No auth interceptor here on purpose. Services attach their own Authorization
  * header, and two callers must not have one attached for them: resetRequest sends
  * the password reset token from the URL rather than the session token, and login
- * and recoverRequest are unauthenticated. See CLAUDE.md.
+ * and recoverRequest are unauthenticated.
  */
 const apiClient = axios.create({
   baseURL: process.env.REACT_APP_API_URL || '',

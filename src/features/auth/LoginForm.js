@@ -16,10 +16,10 @@ import authService from './authService';
 import userService from './userService';
 
 /*
- * Set in the deployed environment only, so the public demo signs in with one click
- * while local development keeps an empty form. These are inlined into the bundle at
- * build time, which is fine: they are the published credentials of a shared demo
- * account holding seeded data, not a secret.
+ * Set in the deployed environment only, so a visitor without an account of their own
+ * can sign in, while local development keeps an empty form. These are inlined into
+ * the bundle at build time, which is fine: they are the published credentials of a
+ * shared account holding generated data, not a secret.
  */
 const demoEmail = process.env.REACT_APP_DEMO_EMAIL || '';
 const demoPassword = process.env.REACT_APP_DEMO_PASSWORD || '';
@@ -85,10 +85,10 @@ const LoginForm = ({ className }) => {
           <Form>
             {isDemo && (
               <div className="p-3 mb-4 text-sm border rounded font-lato text-primary-dark-plutus bg-skyblue-plutus border-primary-blue-plutus">
-                <span className="font-bold">Demo account.</span>
+                <span className="font-bold">Guest account.</span>
                 {' '}
-                Credentials are filled in already, so just select Sign In. The data is
-                seeded and resets nightly.
+                Credentials are filled in already, so just select Sign In. The records
+                are generated, and reset nightly.
               </div>
             )}
 
